@@ -2,9 +2,9 @@
 
 namespace AdrianBrown\Mixable;
 
+use AdrianBrown\Mixable\Commands\MixableCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use AdrianBrown\Mixable\Commands\MixableCommand;
 
 class MixableServiceProvider extends PackageServiceProvider
 {

@@ -2,9 +2,9 @@
 
 namespace AdrianBrown\Mixable\Tests;
 
+use AdrianBrown\Mixable\MixableServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use AdrianBrown\Mixable\MixableServiceProvider;
 
 class TestCase extends Orchestra
 {
