@@ -11,8 +11,7 @@
     "authors": [
         {
             "name": "Adrian Brown",
-            "email": "code@adrianbrown.co",
-            "role": "Developer"
+            "email": "code@adrianbrown.co"
         }
     ],
     "require": {
