@@ -159,6 +159,82 @@ it('will set attributes on the macroable', function () {
     $this->markTestIncomplete('do better');
 });
 
+it('does not macro private methods', function () {
+    $this->markTestIncomplete('do better');
+});
+
+it('does not macro protected methods', function () {
+    $this->markTestIncomplete('do better');
+});
+
+it('does not macro static private methods', function () {
+    $this->markTestIncomplete('do better');
+});
+
+it('does not macro static protected methods', function () {
+    $this->markTestIncomplete('do better');
+});
+
+it('does not macro static public methods', function () {
+    $this->markTestIncomplete('do better');
+});
+
+it('does not get static attributes on the macroable via the mixin class', function () {
+    $this->markTestIncomplete('do better');
+});
+
+it('does not set static attributes on the macroable via the mixin class', function () {
+    $this->markTestIncomplete('do better');
+});
+
+it('will return a value that is not the macroable or the mixin', function () {
+    $this->markTestIncomplete('do better');
+});
+
+it('will return the mixin instance if the macroable returned $this', function () {
+    $this->markTestIncomplete('do better');
+});
+
+it('will return the macroable object if it is not the same instance as the macroable', function () {
+    $this->markTestIncomplete('do better');
+});
+
+test('the mixin can forward calls to public methods on the macroable', function () {
+    $this->markTestIncomplete('do better');
+});
+
+test('the mixin can forward calls to protected methods on the macroable', function () {
+    $this->markTestIncomplete('do better');
+});
+
+test('the mixin can forward calls to private methods on the macroable', function () {
+    $this->markTestIncomplete('do better');
+});
+
+test('the mixin can get public attributes on the macroable', function () {
+    $this->markTestIncomplete('do better');
+});
+
+test('the mixin can get protected attributes on the macroable', function () {
+    $this->markTestIncomplete('do better');
+});
+
+test('the mixin can get private attributes on the macroable', function () {
+    $this->markTestIncomplete('do better');
+});
+
+test('the mixin can set public attributes on the macroable', function () {
+    $this->markTestIncomplete('do better');
+});
+
+test('the mixin can set protected attributes on the macroable', function () {
+    $this->markTestIncomplete('do better');
+});
+
+test('the mixin can set private attributes on the macroable', function () {
+    $this->markTestIncomplete('do better');
+});
+
 test('caveat: static::class will give the mixin class (has solutions)', function () {
     $this->markTestIncomplete('do better');
 });
