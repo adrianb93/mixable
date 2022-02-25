@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace AdrianBrown\Mixable\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class MixableCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'mixable';
 
     public $description = 'My command';
 
