@@ -5,8 +5,8 @@ namespace AdrianBrown\Mixable\Tests;
 use AdrianBrown\Mixable\Mixin;
 use AdrianBrown\Mixable\Tests\Support\CollectionMixin;
 use AdrianBrown\Mixable\Tests\Support\TransposeCollectionMethod;
-use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use Illuminate\Support\Collection;
 
 it('does not add the macro to the macroable if mix is not called', function () {
     expect(Collection::hasMacro('transpose'))->toBe(false);
@@ -27,7 +27,7 @@ it('adds the macro to the macroable via mix(array)', function () {
 });
 
 it('adds the macro to the macroable via mix() where the mixin has $macroable = string', function () {
-    $mixin = new class {
+    $mixin = new class () {
         use Mixin;
         use TransposeCollectionMethod;
 
@@ -40,7 +40,7 @@ it('adds the macro to the macroable via mix() where the mixin has $macroable = s
 });
 
 it('adds the macro to the macroable via mix() where the mixin has $macroable = array', function () {
-    $mixin = new class {
+    $mixin = new class () {
         use Mixin;
         use TransposeCollectionMethod;
 
@@ -53,7 +53,7 @@ it('adds the macro to the macroable via mix() where the mixin has $macroable = a
 });
 
 it('adds the macro to the macroable via mix() where the mixin has $macroables = string', function () {
-    $mixin = new class {
+    $mixin = new class () {
         use Mixin;
         use TransposeCollectionMethod;
 
@@ -66,7 +66,7 @@ it('adds the macro to the macroable via mix() where the mixin has $macroables = 
 });
 
 it('adds the macro to the macroable via mix() where the mixin has $macroables = array', function () {
-    $mixin = new class {
+    $mixin = new class () {
         use Mixin;
         use TransposeCollectionMethod;
 
@@ -79,7 +79,7 @@ it('adds the macro to the macroable via mix() where the mixin has $macroables = 
 });
 
 it('adds the macro to the macroable via mix() where the mixin has $macroable and $macroables', function () {
-    $mixin = new class {
+    $mixin = new class () {
         use Mixin;
         use TransposeCollectionMethod;
 
@@ -115,7 +115,7 @@ it('works', function () {
 });
 
 it('will affect the macroable instance when calling methods', function () {
-    $mixin = (new class {
+    $mixin = (new class () {
         use Mixin;
 
         public function mixinPush($item)

@@ -3,7 +3,6 @@
 namespace AdrianBrown\Mixable;
 
 use AdrianBrown\Mixable\Concerns\ForwardsScopedCalls;
-use BadMethodCallException;
 use InvalidArgumentException;
 
 trait Mixin
@@ -15,9 +14,9 @@ trait Mixin
     public static function mix($macroables = null): void
     {
         $macroables = collect()
-            ->wrap((new static)->macroable ?? '')
+            ->wrap((new static())->macroable ?? '')
             ->merge(collect()->wrap($macroables ?? []))
-            ->merge(collect()->wrap((new static)->macroables ?? []))
+            ->merge(collect()->wrap((new static())->macroables ?? []))
             ->filter();
 
         $mixin = get_called_class();
@@ -26,6 +25,7 @@ trait Mixin
             if (is_subclass_of($mixin, $macroable)) {
                 $mixinTrait = Mixin::class;
                 $mixableTrait = Mixable::class;
+
                 throw new InvalidArgumentException(
                     "Cannot mixin [{$mixin}] because it is a subclass of [{$macroable}]. Instead of the [{$mixinTrait}] trait, use the [{$mixableTrait}] trait."
                 );
@@ -37,7 +37,7 @@ trait Mixin
 
     public static function newMixableInstance($macroableInstance)
     {
-        return tap(new self, fn ($mixin) => $mixin->macroableInstance = $macroableInstance);
+        return tap(new self(), fn ($mixin) => $mixin->macroableInstance = $macroableInstance);
     }
 
     public function newMacroableInstance()

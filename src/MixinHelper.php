@@ -2,7 +2,6 @@
 
 namespace AdrianBrown\Mixable;
 
-use AdrianBrown\Mixable\Mixable;
 use Closure;
 use ReflectionClass;
 use ReflectionMethod;
