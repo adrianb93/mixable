@@ -142,7 +142,7 @@ it('will affect the macroable instance when making method calls', function () {
             $callToProtectedMethod = $test->sortByMany();
 
             // Because it returned $this (collection $this), but our forwarded call retutned the decorator (mixin $this)
-            expect($test)->toBeInstanceOf($this::class);
+            expect($test)->toBeInstanceOf(get_class($this));
 
             // However, if it returned static::make() the decorator is not returned because it is not the same instance as the macroable.
             expect($callToProtectedMethod)->toBeInstanceOf(Collection::class);
@@ -160,8 +160,8 @@ it('will affect the macroable instance when making method calls', function () {
     // Even though we return the decorator, the macro will detect this and return the macroable instance for userland.
     expect($resultA)->toBeInstanceOf(Collection::class);
     expect($resultB)->toBeInstanceOf(Collection::class);
-    expect($resultA)->not->toBeInstanceOf($mixin::class);
-    expect($resultB)->not->toBeInstanceOf($mixin::class);
+    expect($resultA)->not->toBeInstanceOf(get_class($mixin));
+    expect($resultB)->not->toBeInstanceOf(get_class($mixin));
     expect($collection->toArray())->toBe(['a', '2', 'd']);
 });
 
@@ -338,7 +338,7 @@ it('cannot get static attributes on the macroable via the mixin class', function
     expect(TestMe::hasMacro('staticallyFromMixinUsingTheMacroableClassName'))->toBe(true);
     expect(TestMe::new()->staticallyFromMixinUsingTheMacroableClassName())->toBe('public_static_attribute_value');
     TestMe::new()->staticallyFromMixinUsingTheStaticKeyword(); // This will throw an exception.
-})->throws('Access to undeclared static property class@anonymous::$publicStaticAttribute');
+})->throws('Access to undeclared static property');
 
 it('cannot set static attributes on the macroable via the mixin class', function () {
     (new class () {
@@ -363,7 +363,7 @@ it('cannot set static attributes on the macroable via the mixin class', function
     TestMe::new()->staticallyFromMixinUsingTheMacroableClassName();
     expect(TestMe::$publicStaticAttribute)->toBe('foo');
     TestMe::new()->staticallyFromMixinUsingTheStaticKeyword(); // This will throw an exception.
-})->throws('Access to undeclared static property class@anonymous::$publicStaticAttribute');
+})->throws('Access to undeclared static property');
 
 it('can get static attributes on the macroable via the mixin class if it is within an invade callback', function () {
     (new class () {

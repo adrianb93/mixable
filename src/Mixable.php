@@ -34,7 +34,10 @@ trait Mixable
         // Fallback?
         // - This is the "in" method - do as you wish to make an instance of the mixable subclass.
 
-        return tap(resolve(get_called_class()), fn ($mixable) => $mixable->macroableInstance = $parent);
+        return tap(resolve(get_called_class()), function ($mixable) use ($parent) {
+            $mixable->macroableInstance = $parent;
+            $mixable->bootMixable();
+        });
     }
 
     public function newMacroableInstance()
@@ -47,5 +50,9 @@ trait Mixable
         // - This is the "out" method - do as you wish to return the macroable instance, or happily return the mixable subclass instance ($this).
 
         return $this;
+    }
+
+    public function bootMixable()
+    {
     }
 }

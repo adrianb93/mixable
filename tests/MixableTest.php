@@ -48,8 +48,7 @@ it('does not add the macros to the class it extends if `mix()` is not called', f
 });
 
 it("creates the subclass instance using the macroable parent class instance's state", function () {
-    ($mixable = new class extends Collection
-    {
+    ($mixable = new class () extends Collection {
         use Mixable;
 
         protected static function newMixableInstance($parent): self
@@ -81,7 +80,7 @@ it("creates the subclass instance using the macroable parent class instance's st
 
     expect($result->toArray())->toBe([1, 2, 3, 'd']);
     expect($result)->toBeInstanceOf(Collection::class);
-    expect($result)->not->toBeInstanceOf($mixable::class);
+    expect($result)->not->toBeInstanceOf(get_class($mixable));
 });
 
 it("returns the macroable instance with it's state updated to be the same as the mixable subclass state", function () {
@@ -133,5 +132,9 @@ test('returning some primative value will still result in the macroable state be
 });
 
 test("invade sets the macroable parent instance's state going in, and sets the mixable subclass instance's state going out", function () {
+    $this->markTestIncomplete('do better');
+});
+
+test('can implement a `bootMixable()` function to do something to the mixable after it is instantiated', function () {
     $this->markTestIncomplete('do better');
 });

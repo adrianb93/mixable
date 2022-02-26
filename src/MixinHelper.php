@@ -37,7 +37,7 @@ class MixinHelper
     }
 
     /** @return mixed */
-    public static function invade(null|string|object $target, Closure $callback)
+    public static function invade($target, Closure $callback)
     {
         if ($target === null) {
             $callback = Closure::bind($callback, null, null);

@@ -19,7 +19,7 @@ test('problem: static::class gives the mixin class name', function () {
     $testMe = TestMe::new();
 
     tap($testMe->mixinGetClassName(), function ($result) use ($mixin, $testMe) {
-        expect($result)->toBe($mixin::class);
+        expect($result)->toBe(get_class($mixin));
         expect($result)->not->toBe(TestMe::class);
     });
 });
@@ -52,6 +52,6 @@ test('solution: static::class gives the macroable class name with these solution
         'getClassOnMacroableInstanceSolution',
     ])->each(fn ($method) => tap(TestMe::new()->{$method}(), function ($result) use ($mixin) {
         expect($result)->toBe(TestMe::class);
-        expect($result)->not->toBe($mixin::class);
+        expect($result)->not->toBe(get_class($mixin));
     }));
 });
