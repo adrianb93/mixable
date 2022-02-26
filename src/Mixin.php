@@ -3,6 +3,7 @@
 namespace AdrianBrown\Mixable;
 
 use AdrianBrown\Mixable\Concerns\ForwardsScopedCalls;
+use Closure;
 use InvalidArgumentException;
 
 trait Mixin
@@ -43,6 +44,11 @@ trait Mixin
     public function newMacroableInstance()
     {
         return $this->macroableInstance;
+    }
+
+    protected function invade(Closure $callback)
+    {
+        return MixinHelper::invade($this->macroableInstance, $callback);
     }
 
     public function __get($attribute)
