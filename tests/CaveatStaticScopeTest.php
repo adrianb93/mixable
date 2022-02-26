@@ -1,6 +1,6 @@
 <?php
 
-namespace AdrianBrown\Mixable\Tests\Caveats;
+namespace AdrianBrown\Mixable\Tests;
 
 use AdrianBrown\Mixable\Mixin;
 use AdrianBrown\Mixable\Tests\Support\TestMe;

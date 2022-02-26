@@ -6,6 +6,8 @@ use InvalidArgumentException;
 
 trait Mixable
 {
+    protected $macroableInstance;
+
     public static function mix(?string $macroable = null): void
     {
         $mixin = get_called_class();
@@ -25,11 +27,25 @@ trait Mixable
 
     protected static function newMixableInstance($parent)
     {
-        return resolve(get_called_class());
+        // Idea:
+        // - Default is new mixable instance without constructor: https://www.php.net/manual/en/reflectionclass.newinstancewithoutconstructor.php
+        // - Copy the properties that exist in the $parent to the mixable instance
+        // - Set `$mixable->macroableInstance = $parent` on the mixin so that we can do the reverse on out
+        // Fallback?
+        // - This is the "in" method - do as you wish to make an instance of the mixable subclass.
+
+        return tap(resolve(get_called_class()), fn ($mixable) => $mixable->macroableInstance = $parent);
     }
 
     public function newMacroableInstance()
     {
+        // Idea:
+        // - Given we have `$mixable->macroableInstance`
+        // - Copy the mixable's class properties to the macroable's class properties if it exists there.
+        // - `return $this->macroableInstance;` given the state is the same as the mixable's.
+        // Fallback?
+        // - This is the "out" method - do as you wish to return the macroable instance, or happily return the mixable subclass instance ($this).
+
         return $this;
     }
 }
