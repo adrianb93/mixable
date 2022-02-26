@@ -2,11 +2,7 @@
 
 namespace AdrianBrown\Mixable\Tests;
 
-use AdrianBrown\Mixable\Mixable;
 use AdrianBrown\Mixable\Tests\Support\CollectionMixable;
-use AdrianBrown\Mixable\Tests\Support\TestMe;
-use AdrianBrown\Mixable\Tests\Support\TransposeCollectionMethod;
-use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
 it('works', function () {
