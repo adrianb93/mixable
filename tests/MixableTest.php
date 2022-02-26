@@ -2,6 +2,7 @@
 
 namespace AdrianBrown\Mixable\Tests;
 
+use AdrianBrown\Mixable\Mixable;
 use AdrianBrown\Mixable\Tests\Support\CollectionMixable;
 use Illuminate\Support\Collection;
 
@@ -47,7 +48,40 @@ it('does not add the macros to the class it extends if `mix()` is not called', f
 });
 
 it("creates the subclass instance using the macroable parent class instance's state", function () {
-    $this->markTestIncomplete('do better');
+    ($mixable = new class extends Collection
+    {
+        use Mixable;
+
+        protected static function newMixableInstance($parent): self
+        {
+            // The parent comes in.
+            test()->expect($parent)->toBeInstanceOf(Collection::class);
+            test()->expect($parent->toArray())->toBe(['a', 'b', 'c']);
+
+            // New mixable instance.
+            return self::make([1, 2, 3]);
+        }
+
+        public function newMacroableInstance(): Collection
+        {
+            // New parent instance out from mixable values.
+            return Collection::make($this->items);
+        }
+
+        public function example()
+        {
+            expect($this->toArray())->toBe([1, 2, 3]);
+
+            return $this;
+        }
+    })->mix();
+
+    // macroable in / macroable out
+    $result = collect(['a', 'b', 'c'])->example()->push('d');
+
+    expect($result->toArray())->toBe([1, 2, 3, 'd']);
+    expect($result)->toBeInstanceOf(Collection::class);
+    expect($result)->not->toBeInstanceOf($mixable::class);
 });
 
 it("returns the macroable instance with it's state updated to be the same as the mixable subclass state", function () {
@@ -59,6 +93,30 @@ test('the mixable interacts with itself', function () {
 });
 
 test("the parent macroable instance's state is not affected within the mixable subclass", function () {
+    $this->markTestIncomplete('do better');
+});
+
+test('can pull state from the macroable to the mixable', function () {
+    // only class attribute keys on the macroable are pulled from
+    // private attributes are pulled
+    // protected attributes are pulled
+    // public attributes are pulled
+    $this->markTestIncomplete('do better');
+});
+
+test('can push state from the mixable to the macroable', function () {
+    // only class attribute keys on the macroable are pushed to
+    // private attributes are pushed
+    // protected attributes are pushed
+    // public attributes are pushed
+    $this->markTestIncomplete('do better');
+});
+
+test('cannot pull state from the macroable to the mixable if the macroable is not set', function () {
+    $this->markTestIncomplete('do better');
+});
+
+test('cannot push state from the mixable to the macroable if the macroable is not set', function () {
     $this->markTestIncomplete('do better');
 });
 
