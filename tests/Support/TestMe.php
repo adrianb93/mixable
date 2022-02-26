@@ -49,7 +49,7 @@ class TestMe
 
     public function publicCallReturningNewInstance()
     {
-        return tap(new static, function ($testMe) {
+        return tap(new static(), function ($testMe) {
             test()->expect($this)->not->toBe($testMe);
             test()->expect($this->uuid)->not->toBe($testMe->uuid);
             test()->expect($testMe)->toBeInstanceOf(TestMe::class);
@@ -80,7 +80,7 @@ class TestMe
 
     protected function protectedCallReturningNewInstance()
     {
-        return tap(new static, function ($testMe) {
+        return tap(new static(), function ($testMe) {
             test()->expect($this)->not->toBe($testMe);
             test()->expect($testMe)->toBeInstanceOf(TestMe::class);
         });
@@ -110,7 +110,7 @@ class TestMe
 
     private function privateCallReturningNewInstance()
     {
-        return tap(new static, function ($testMe) {
+        return tap(new static(), function ($testMe) {
             test()->expect($this)->not->toBe($testMe);
             test()->expect($testMe)->toBeInstanceOf(TestMe::class);
         });
@@ -132,7 +132,7 @@ class TestMe
 
     public static function publicStaticCallReturningNewInstance()
     {
-        return new static;
+        return new static();
     }
 
     public static function publicStaticCallReturningValue()
@@ -151,7 +151,7 @@ class TestMe
 
     protected static function protectedStaticCallReturningNewInstance()
     {
-        return new static;
+        return new static();
     }
 
     protected static function protectedStaticCallReturningValue()
@@ -170,7 +170,7 @@ class TestMe
 
     private static function privateStaticCallReturningNewInstance()
     {
-        return new static;
+        return new static();
     }
 
     private static function privateStaticCallReturningValue()
