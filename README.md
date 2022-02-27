@@ -6,6 +6,8 @@ Nicer mixins for `Macroable` classes in Laravel.
 
 *[ TODO: Link to blog post explaining the `Macorable` trait; how it does mixins; and what this package does differently. ]*
 
+![Macroable Mixins vs. Mixable Mixins](art/meme.jpeg)
+
 ## Installation
 
 You can install this package via composer:
