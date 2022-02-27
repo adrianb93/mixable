@@ -4,6 +4,8 @@
 
 Nicer mixins for `Macroable` classes in Laravel.
 
+*[ TODO: Link to blog post explaining the `Macorable` trait; how it does mixins; and what this package does differently. ]*
+
 ## Installation
 
 You can install this package via composer:
@@ -346,6 +348,12 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 - [Adrian Brown](https://github.com/adrianb93)
 - [All Contributors](../../contributors)
+
+I like to use dedicated query builders and collections for my models. I have a base collection and query builder with some awesome methods. I use the `Mixable` trait on them and created this package because of them. You can learn more about dedicated collections and query builders for eloquent models on [Tim MacDonald's](https://twitter.com/timacdonald87) blog:
+
+- [Follow the Eloquent road](https://timacdonald.me/follow-the-eloquent-road-laracon-talk/)
+- [Giving collections a voice](https://timacdonald.me/giving-collections-a-voice/)
+- [Dedicated query builders for Eloquent models](https://timacdonald.me/giving-collections-a-voice/)
 
 ## License
 
