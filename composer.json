@@ -54,16 +54,6 @@
             "phpstan/extension-installer": true
         }
     },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "AdrianBrown\\Mixable\\MixableServiceProvider"
-            ],
-            "aliases": {
-                "Mixable": "AdrianBrown\\Mixable\\Facades\\Mixable"
-            }
-        }
-    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }

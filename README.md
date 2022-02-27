@@ -1,4 +1,9 @@
-⚠️ **Only `Mixin` is ready. `Mixable` is still in development.** ⚠️
+⚠️ **This is still in development.** ⚠️
+
+- [ ] Finish Mixable tests.
+- [ ] Macros need to support arguments by reference.
+- [ ] Blog post.
+- [ ] Finish that meme.
 
 # Mixable
 

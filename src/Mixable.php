@@ -23,7 +23,7 @@ trait Mixable
             );
         }
 
-        Mixer::mixin($mixin, $macroable, fn () => $mixin::newMixableInstance($this));
+        Mixer::mixin($mixin, $macroable, fn ($parent) => $mixin::newMixableInstance($parent));
     }
 
     protected function inScope(Closure $callback)

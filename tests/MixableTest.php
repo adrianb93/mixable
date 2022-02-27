@@ -138,3 +138,11 @@ test("`inScope` sets the macroable parent instance's state going in, and sets th
 test('can implement a `bootMixable()` function to do something to the mixable after it is instantiated', function () {
     $this->markTestIncomplete('do better');
 });
+
+test('can call a macro statically', function () {
+    $this->markTestIncomplete('do better');
+});
+
+test('bug: a mixable macro must support method parameters by reference', function () {
+    $this->markTestIncomplete('do better');
+});

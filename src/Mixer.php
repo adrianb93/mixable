@@ -26,12 +26,13 @@ class Mixer
         foreach ($methods as $method) {
             $macroable::macro($method, function (...$args) use ($method, $createMixinInstance) {
                 /** @phpstan-ignore-next-line */
-                $mixin = $createMixinInstance->call($this);
+                $mixin = $createMixinInstance(isset($this) ? $this : null);
                 $result = call_user_func([$mixin, $method], ...$args);
                 $resultIsMixin = $result === $mixin && in_array(Mixin::class, class_uses($mixin));
                 $resultIsMixable = $result === $mixin && in_array(Mixable::class, class_uses($mixin));
+                $macroable = isset($this) && ($resultIsMixin || $resultIsMixable) ? $result->newMacroableInstance() : null;
 
-                return $resultIsMixin || $resultIsMixable ? $result->newMacroableInstance() : $result;
+                return $macroable ?? $result;
             });
         }
     }

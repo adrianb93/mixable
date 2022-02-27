@@ -32,7 +32,7 @@ trait Mixin
                 );
             }
 
-            Mixer::mixin($mixin, $macroable, fn () => $mixin::newMixableInstance($this));
+            Mixer::mixin($mixin, $macroable, fn ($macroable) => $mixin::newMixableInstance($macroable));
         }
     }
 

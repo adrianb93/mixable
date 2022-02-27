@@ -952,3 +952,11 @@ test('the mixin can set private static attributes on the macroable through an `i
         expect($result)->toBe('new_private_static_attribute_value');
     });
 });
+
+test('can call a macro statically', function () {
+    $this->markTestIncomplete('do better');
+});
+
+test('bug: a mixin macro must support method parameters by reference', function () {
+    $this->markTestIncomplete('do better');
+});
