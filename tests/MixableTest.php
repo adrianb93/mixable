@@ -131,7 +131,7 @@ test('returning some primative value will still result in the macroable state be
     $this->markTestIncomplete('do better');
 });
 
-test("invade sets the macroable parent instance's state going in, and sets the mixable subclass instance's state going out", function () {
+test("`inScope` sets the macroable parent instance's state going in, and sets the mixable subclass instance's state going out", function () {
     $this->markTestIncomplete('do better');
 });
 

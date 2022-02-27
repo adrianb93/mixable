@@ -32,7 +32,7 @@ trait Mixin
                 );
             }
 
-            MixinHelper::mixin($mixin, $macroable, fn () => $mixin::newMixableInstance($this));
+            Mixer::mixin($mixin, $macroable, fn () => $mixin::newMixableInstance($this));
         }
     }
 
@@ -46,9 +46,9 @@ trait Mixin
         return $this->macroableInstance;
     }
 
-    protected function invade(Closure $callback)
+    protected function inScope(Closure $callback)
     {
-        return MixinHelper::invade($this->macroableInstance, $callback);
+        return Mixer::invade($this->macroableInstance, $callback);
     }
 
     public function __get($attribute)
@@ -57,12 +57,12 @@ trait Mixin
             return [];
         }
 
-        return MixinHelper::invade($this->macroableInstance, fn () => $this->{$attribute});
+        return $this->inScope(fn () => $this->{$attribute});
     }
 
     public function __set($attribute, $value)
     {
-        MixinHelper::invade($this->macroableInstance, fn () => $this->{$attribute} = $value);
+        $this->inScope(fn () => $this->{$attribute} = $value);
     }
 
     public function __call($method, $parameters)
@@ -74,6 +74,6 @@ trait Mixin
     {
         $mixin = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT, 1)[0]['object'];
 
-        return MixinHelper::invade($mixin, fn () => $this->{$method}(...$parameters));
+        return Mixer::invade($mixin, fn () => $this->{$method}(...$parameters));
     }
 }

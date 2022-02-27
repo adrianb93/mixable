@@ -2,6 +2,7 @@
 
 namespace AdrianBrown\Mixable;
 
+use Closure;
 use InvalidArgumentException;
 
 trait Mixable
@@ -22,7 +23,12 @@ trait Mixable
             );
         }
 
-        MixinHelper::mixin($mixin, $macroable, fn () => $mixin::newMixableInstance($this));
+        Mixer::mixin($mixin, $macroable, fn () => $mixin::newMixableInstance($this));
+    }
+
+    protected function inScope(Closure $callback)
+    {
+        return Mixer::invade($this->macroableInstance ?? $this, $callback);
     }
 
     protected static function newMixableInstance($parent)

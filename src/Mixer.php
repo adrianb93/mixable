@@ -6,7 +6,7 @@ use Closure;
 use ReflectionClass;
 use ReflectionMethod;
 
-class MixinHelper
+class Mixer
 {
     public static function mixin(string $mixin, string $macroable, ?Closure $createMixinInstance = null): void
     {

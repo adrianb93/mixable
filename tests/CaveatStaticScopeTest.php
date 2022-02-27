@@ -30,9 +30,9 @@ test('solution: static::class gives the macroable class name with these solution
 
         public string $macroable = TestMe::class;
 
-        public function invadeSolution()
+        public function inScopeSolution()
         {
-            return $this->invade(fn () => static::class);
+            return $this->inScope(fn () => static::class);
         }
 
         public function noStaticKeywordSolution()
@@ -47,7 +47,7 @@ test('solution: static::class gives the macroable class name with these solution
     })->mix();
 
     collect([
-        'invadeSolution',
+        'inScopeSolution',
         'noStaticKeywordSolution',
         'getClassOnMacroableInstanceSolution',
     ])->each(fn ($method) => tap(TestMe::new()->{$method}(), function ($result) use ($mixin) {

@@ -10,11 +10,11 @@ test('problem: $this is an instance of the mixable subclass meaning you are not 
     $this->markTestIncomplete('do better');
 });
 
-test('solution: for mixins you can use the invade callback so that $this is an instance of the macroable', function () {
+test('solution: for mixins you can use the `inScope` callback so that $this is an instance of the macroable', function () {
     $this->markTestIncomplete('do better');
 });
 
-test('solution: for mixables you can use the invade callback so that $this is an instance of the macroable parent', function () {
+test('solution: for mixables you can use the `inScope` callback so that $this is an instance of the macroable parent', function () {
     $this->markTestIncomplete('do better');
 });
 

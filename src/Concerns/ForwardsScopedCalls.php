@@ -2,7 +2,7 @@
 
 namespace AdrianBrown\Mixable\Concerns;
 
-use AdrianBrown\Mixable\MixinHelper;
+use AdrianBrown\Mixable\Mixer;
 use BadMethodCallException;
 use Error;
 
@@ -21,7 +21,7 @@ trait ForwardsScopedCalls
     protected function forwardCallTo($object, $method, $parameters)
     {
         try {
-            return MixinHelper::invade($object, fn () => $this->{$method}(...$parameters));
+            return Mixer::invade($object, fn () => $this->{$method}(...$parameters));
         } catch (Error|BadMethodCallException $e) {
             $pattern = '~^Call to undefined method (?P<class>[^:]+)::(?P<method>[^\(]+)\(\)$~';
 

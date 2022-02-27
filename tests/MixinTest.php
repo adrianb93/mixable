@@ -365,24 +365,24 @@ it('cannot set static attributes on the macroable via the mixin class', function
     TestMe::new()->staticallyFromMixinUsingTheStaticKeyword(); // This will throw an exception.
 })->throws('Access to undeclared static property');
 
-it('can get static attributes on the macroable via the mixin class if it is within an invade callback', function () {
+it('can get static attributes on the macroable via the mixin class if it is within an `inScope` callback', function () {
     (new class () {
         use Mixin;
 
         public string $macroable = TestMe::class;
 
-        public function staticallyUsingTheStaticKeywordWithinAnInvadeCallback()
+        public function staticallyUsingTheStaticKeywordWithinAnInScopeCallback()
         {
             // The closure is scoped to the macroable which is why this works.
-            return $this->invade(fn () => static::$publicStaticAttribute);
+            return $this->inScope(fn () => static::$publicStaticAttribute);
         }
     })->mix();
 
-    expect(TestMe::hasMacro('staticallyUsingTheStaticKeywordWithinAnInvadeCallback'))->toBe(true);
-    expect(TestMe::new()->staticallyUsingTheStaticKeywordWithinAnInvadeCallback())->toBe('public_static_attribute_value');
+    expect(TestMe::hasMacro('staticallyUsingTheStaticKeywordWithinAnInScopeCallback'))->toBe(true);
+    expect(TestMe::new()->staticallyUsingTheStaticKeywordWithinAnInScopeCallback())->toBe('public_static_attribute_value');
 });
 
-it('can set static attributes on the macroable via the mixin class if it is within an invade callback', function () {
+it('can set static attributes on the macroable via the mixin class if it is within an `inScope` callback', function () {
     (new class () {
         use Mixin;
 
@@ -390,7 +390,7 @@ it('can set static attributes on the macroable via the mixin class if it is with
 
         public function staticallyFromMixinUsingTheStaticKeyword()
         {
-            $this->invade(fn () => static::$publicStaticAttribute = 'bar');
+            $this->inScope(fn () => static::$publicStaticAttribute = 'bar');
         }
 
         public function staticallyFromMixinUsingTheMacroableClassName()
@@ -815,7 +815,7 @@ test('the mixin can set private attributes on the macroable', function () {
     expect($testMe->mixinGetPrivateAttribute())->toBe('new_private_value');
 });
 
-test('the mixin can get public static attributes on the macroable through an invade callback', function () {
+test('the mixin can get public static attributes on the macroable through an `inScope` callback', function () {
     (new class () {
         use Mixin;
 
@@ -823,7 +823,7 @@ test('the mixin can get public static attributes on the macroable through an inv
 
         public function mixinGetPublicStaticAttribute()
         {
-            return $this->invade(fn () => static::$publicStaticAttribute);
+            return $this->inScope(fn () => static::$publicStaticAttribute);
         }
     })->mix();
     expect(TestMe::hasMacro('mixinGetPublicStaticAttribute'))->toBe(true);
@@ -833,7 +833,7 @@ test('the mixin can get public static attributes on the macroable through an inv
     });
 });
 
-test('the mixin can set public static attributes on the macroable through an invade callback', function () {
+test('the mixin can set public static attributes on the macroable through an `inScope` callback', function () {
     (new class () {
         use Mixin;
 
@@ -841,12 +841,12 @@ test('the mixin can set public static attributes on the macroable through an inv
 
         public function mixinGetPublicStaticAttribute()
         {
-            return $this->invade(fn () => static::$publicStaticAttribute);
+            return $this->inScope(fn () => static::$publicStaticAttribute);
         }
 
         public function mixinSetPublicStaticAttribute($value)
         {
-            $this->invade(fn () => static::$publicStaticAttribute = $value);
+            $this->inScope(fn () => static::$publicStaticAttribute = $value);
         }
     })->mix();
     expect(TestMe::hasMacro('mixinGetPublicStaticAttribute'))->toBe(true);
@@ -861,7 +861,7 @@ test('the mixin can set public static attributes on the macroable through an inv
     });
 });
 
-test('the mixin can get protected static attributes on the macroable through an invade callback', function () {
+test('the mixin can get protected static attributes on the macroable through an `inScope` callback', function () {
     (new class () {
         use Mixin;
 
@@ -869,7 +869,7 @@ test('the mixin can get protected static attributes on the macroable through an 
 
         public function mixinGetProtectedStaticAttribute()
         {
-            return $this->invade(fn () => static::$protectedStaticAttribute);
+            return $this->inScope(fn () => static::$protectedStaticAttribute);
         }
     })->mix();
     expect(TestMe::hasMacro('mixinGetProtectedStaticAttribute'))->toBe(true);
@@ -879,7 +879,7 @@ test('the mixin can get protected static attributes on the macroable through an 
     });
 });
 
-test('the mixin can set protected static attributes on the macroable through an invade callback', function () {
+test('the mixin can set protected static attributes on the macroable through an `inScope` callback', function () {
     (new class () {
         use Mixin;
 
@@ -887,12 +887,12 @@ test('the mixin can set protected static attributes on the macroable through an 
 
         public function mixinGetProtectedStaticAttribute()
         {
-            return $this->invade(fn () => static::$protectedStaticAttribute);
+            return $this->inScope(fn () => static::$protectedStaticAttribute);
         }
 
         public function mixinSetProtectedStaticAttribute($value)
         {
-            $this->invade(fn () => static::$protectedStaticAttribute = $value);
+            $this->inScope(fn () => static::$protectedStaticAttribute = $value);
         }
     })->mix();
     expect(TestMe::hasMacro('mixinGetProtectedStaticAttribute'))->toBe(true);
@@ -907,7 +907,7 @@ test('the mixin can set protected static attributes on the macroable through an 
     });
 });
 
-test('the mixin can get private static attributes on the macroable through an invade callback', function () {
+test('the mixin can get private static attributes on the macroable through an `inScope` callback', function () {
     (new class () {
         use Mixin;
 
@@ -915,7 +915,7 @@ test('the mixin can get private static attributes on the macroable through an in
 
         public function mixinGetPrivateStaticAttribute()
         {
-            return $this->invade(fn () => static::$privateStaticAttribute);
+            return $this->inScope(fn () => static::$privateStaticAttribute);
         }
     })->mix();
     expect(TestMe::hasMacro('mixinGetPrivateStaticAttribute'))->toBe(true);
@@ -925,7 +925,7 @@ test('the mixin can get private static attributes on the macroable through an in
     });
 });
 
-test('the mixin can set private static attributes on the macroable through an invade callback', function () {
+test('the mixin can set private static attributes on the macroable through an `inScope` callback', function () {
     (new class () {
         use Mixin;
 
@@ -933,12 +933,12 @@ test('the mixin can set private static attributes on the macroable through an in
 
         public function mixinGetPrivateStaticAttribute()
         {
-            return $this->invade(fn () => static::$privateStaticAttribute);
+            return $this->inScope(fn () => static::$privateStaticAttribute);
         }
 
         public function mixinSetPrivateStaticAttribute($value)
         {
-            $this->invade(fn () => static::$privateStaticAttribute = $value);
+            $this->inScope(fn () => static::$privateStaticAttribute = $value);
         }
     })->mix();
     expect(TestMe::hasMacro('mixinGetPrivateStaticAttribute'))->toBe(true);

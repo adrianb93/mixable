@@ -31,9 +31,9 @@ test('solution: passing by reference works with these solutions', function () {
 
         public string $macroable = Collection::class;
 
-        public function invadeSolution()
+        public function inScopeSolution()
         {
-            $this->invade(fn () => array_walk($this->items, function (&$item) {
+            $this->inScope(fn () => array_walk($this->items, function (&$item) {
                 $item = $item * 2;
             }));
 
@@ -53,7 +53,7 @@ test('solution: passing by reference works with these solutions', function () {
     })->mix();
 
     collect([
-        'invadeSolution',
+        'inScopeSolution',
         'copyValueSolution',
     ])->each(fn ($method) => tap(collect([1, 2, 3])->{$method}(), function ($result) {
         expect($result->toArray())->toBe([2, 4, 6]);
